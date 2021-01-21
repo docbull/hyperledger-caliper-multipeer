@@ -1,5 +1,0 @@
-2021.01.20-14:25:51.987[90m debug[39m [caliper] [blockchain] 	Constructed a winston logger with the specified settings
-2021.01.20-14:25:52.067[33m warn [39m [caliper] [bind] 	Working directory not specified. Using "/home/inlab/caliper-benchmarks/networks"
-2021.01.20-14:25:52.068[32m info [39m [caliper] [bind] 	Binding for fabric@1.4.8. This might take some time...
-2021.01.20-14:25:52.068[32m info [39m [caliper] [bind] 	Using working directory: /home/inlab/caliper-benchmarks/networks
-2021.01.20-14:25:52.068[32m info [39m [caliper] [bind] 	Calling npm with: install fabric-client@1.4.8 fabric-protos@2.0.0-snapshot.1 fabric-network@1.4.8

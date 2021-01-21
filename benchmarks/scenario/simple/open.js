@@ -14,95 +14,46 @@
 
 'use strict';
 
-module.exports.info  = 'opening accounts';
+const OperationBase = require('./utils/operation-base');
+const SimpleState = require('./utils/simple-state');
 
-let account_array = [];
-let txnPerBatch;
-let initMoney;
-let bc, contx;
-module.exports.init = function(blockchain, context, args) {
-    if(!args.hasOwnProperty('money')) {
-        return Promise.reject(new Error('simple.open - \'money\' is missed in the arguments'));
-    }
-
-    if(!args.hasOwnProperty('txnPerBatch')) {
-        args.txnPerBatch = 1;
-    }
-    initMoney = args.money;
-    txnPerBatch = args.txnPerBatch;
-    bc = blockchain;
-    contx = context;
-
-    return Promise.resolve();
-};
-
-const dic = 'abcdefghijklmnopqrstuvwxyz';
 /**
- * Generate string by picking characters from dic variable
- * @param {*} number character to select
- * @returns {String} string generated based on @param number
+ * Workload module for initializing the SUT with various accounts.
  */
-function get26Num(number){
-    let result = '';
-    while(number > 0) {
-        result += dic.charAt(number % 26);
-        number = parseInt(number/26);
+class Open extends OperationBase {
+    /**
+     * Initializes the parameters of the workload.
+     */
+    constructor() {
+        super();
     }
-    return result;
-}
 
-let prefix;
-/**
- * Generate unique account key for the transaction
- * @returns {String} account key
- */
-function generateAccount() {
-    // should be [a-z]{1,9}
-    if(typeof prefix === 'undefined') {
-        prefix = get26Num(process.pid);
+    /**
+     * Create an empty state representation.
+     * @return {SimpleState} The state instance.
+     */
+    createSimpleState() {
+        return new SimpleState(this.workerIndex, this.initialMoney, this.moneyToTransfer);
     }
-    return prefix + get26Num(account_array.length+1);
+
+    /**
+     * Assemble TXs for opening new accounts.
+     */
+    async submitTransaction() {
+        let createArgs = this.simpleState.getOpenAccountArguments();
+        const result = await this.sutAdapter.sendRequests(this.createConnectorRequest('open', createArgs));
+
+        let executionTime = result.GetTimeFinal() - result.GetTimeCreate();
+        console.log("Transaction confirmation time: " + executionTime);
+    }
 }
 
 /**
- * Generates simple workload
- * @returns {Object} array of json objects
+ * Create a new instance of the workload module.
+ * @return {WorkloadModuleInterface}
  */
-function generateWorkload() {
-    let workload = [];
-    for(let i= 0; i < txnPerBatch; i++) {
-        let acc_id = generateAccount();
-        account_array.push(acc_id);
-
-        if (bc.getType() === 'fabric') {
-            workload.push({
-                chaincodeFunction: 'open',
-                chaincodeArguments: [acc_id, initMoney.toString()],
-            });
-        } else if (bc.getType() === 'ethereum') {
-                workload.push({
-                    verb: 'open',
-                    args: [acc_id, initMoney]
-                });
-        } else {
-            workload.push({
-                'verb': 'open',
-                'account': acc_id,
-                'money': initMoney
-            });
-        }
-    }
-    return workload;
+function createWorkloadModule() {
+    return new Open();
 }
 
-module.exports.run = function() {
-    let args = generateWorkload();
-    let result = bc.invokeSmartContract(contx, 'simple', 'v0', args, 100);
-    return result
-};
-
-module.exports.end = function() {
-    return Promise.resolve();
-};
-
-module.exports.account_array = account_array;
+module.exports.createWorkloadModule = createWorkloadModule;

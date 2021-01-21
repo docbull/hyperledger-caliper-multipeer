@@ -26,27 +26,27 @@ const CaliperUtils = require('@hyperledger/caliper-core').CaliperUtils;
  * @property {boolean} compatibilityMode Indicates whether the configuration describes a v1.0 Fabric network.
  * @property {boolean} tls Indicates whether TLS communication is configured for the network.
  * @property {boolean} mutualTls Indicates whether mutual TLS communication is configured for the network.
- * @property {Map<string, {channel:string, id:string, version:string}>} The mapping of contract IDs to chaincode details.
+ * @property {Map<string, {channel:string, id:string, version:string}>} The mapping of contract IDs to contract details.
  */
 class FabricNetwork {
     /**
      * Loads and verifies the Common Connection Profile settings.
      *
      * @param {string|object} networkConfig The relative or absolute file path, or the object itself of the Common Connection Profile settings.
-     * @param {string|object} workspace_root The relative or absolute file path, or the object itself of the Common Connection Profile settings.
      */
-    constructor(networkConfig, workspace_root) {
+    constructor(networkConfig) {
         CaliperUtils.assertDefined(networkConfig, '[FabricNetwork.constructor] Parameter \'networkConfig\' if undefined or null');
 
         this.network = undefined;
         if (typeof networkConfig === 'string') {
-            const configPath = CaliperUtils.resolvePath(networkConfig, workspace_root);
+            // resolve path will by default use the known workspace root
+            const configPath = CaliperUtils.resolvePath(networkConfig);
             this.network = CaliperUtils.parseYaml(configPath);
         } else if (typeof networkConfig === 'object' && networkConfig !== null) {
             // clone the object to prevent modification by other objects
             this.network = CaliperUtils.parseYamlString(CaliperUtils.stringifyYaml(networkConfig));
         } else {
-            throw new Error('[FabricNetwork.constructor] Parameter \'networkConfig\' is neither a file path nor an object');
+            throw new Error('[FabricNetwork.constructor] Parameter "networkConfig" is neither a file path nor an object');
         }
 
         this.clientConfigs = {};
@@ -54,22 +54,17 @@ class FabricNetwork {
         this.tls = false;
         this.mutualTls = false;
         this.contractMapping = new Map();
-        this._processConfiguration(workspace_root);
+        this._processConfiguration();
     }
 
 
     /**
      * Internal utility function for retrieving key information from the network configuration.
-     * @param {string} workspaceRoot The path to the root of the workspace.
      *
      * @private
      */
-    _processConfiguration(workspaceRoot) {
+    _processConfiguration() {
         this.mutualTls = !!this.network['mutual-tls'];
-
-        if (this.network.wallet) {
-            this.network.wallet = CaliperUtils.resolvePath(this.network.wallet, workspaceRoot);
-        }
 
         if (this.network.clients) {
             const clients = this.getClients();
@@ -79,16 +74,16 @@ class FabricNetwork {
                 const cObj = this.network.clients[client].client;
                 // normalize paths
                 if (cObj.credentialStore) {
-                    cObj.credentialStore.path = CaliperUtils.resolvePath(cObj.credentialStore.path, workspaceRoot);
-                    cObj.credentialStore.cryptoStore.path = CaliperUtils.resolvePath(cObj.credentialStore.cryptoStore.path, workspaceRoot);
+                    cObj.credentialStore.path = CaliperUtils.resolvePath(cObj.credentialStore.path);
+                    cObj.credentialStore.cryptoStore.path = CaliperUtils.resolvePath(cObj.credentialStore.cryptoStore.path);
                 }
 
                 if (cObj.clientPrivateKey && cObj.clientPrivateKey.path) {
-                    cObj.clientPrivateKey.path = CaliperUtils.resolvePath(cObj.clientPrivateKey.path, workspaceRoot);
+                    cObj.clientPrivateKey.path = CaliperUtils.resolvePath(cObj.clientPrivateKey.path);
                 }
 
                 if (cObj.clientSignedCert && cObj.clientSignedCert.path) {
-                    cObj.clientSignedCert.path = CaliperUtils.resolvePath(cObj.clientSignedCert.path, workspaceRoot);
+                    cObj.clientSignedCert.path = CaliperUtils.resolvePath(cObj.clientSignedCert.path);
                 }
             }
         }
@@ -98,14 +93,14 @@ class FabricNetwork {
             for (const channel of channels) {
                 const cObj = this.network.channels[channel];
 
-                for (const cc of cObj.chaincodes) {
+                for (const cc of cObj.contracts) {
                     if (!cc.contractID) {
                         cc.contractID = cc.id;
                     }
 
                     this.contractMapping.set(cc.contractID, {channel: channel, id: cc.id, version: cc.version});
                     if (cc.language && cc.language !== 'golang' && cc.path) {
-                        cc.path = CaliperUtils.resolvePath(cc.path, workspaceRoot);
+                        cc.path = CaliperUtils.resolvePath(cc.path);
                     }
                 }
             }
@@ -117,11 +112,11 @@ class FabricNetwork {
                 const oObj = this.network.organizations[org];
 
                 if (oObj.adminPrivateKey && oObj.adminPrivateKey.path) {
-                    oObj.adminPrivateKey.path = CaliperUtils.resolvePath(oObj.adminPrivateKey.path, workspaceRoot);
+                    oObj.adminPrivateKey.path = CaliperUtils.resolvePath(oObj.adminPrivateKey.path);
                 }
 
                 if (oObj.signedCert && oObj.signedCert.path) {
-                    oObj.signedCert.path = CaliperUtils.resolvePath(oObj.signedCert.path, workspaceRoot);
+                    oObj.signedCert.path = CaliperUtils.resolvePath(oObj.signedCert.path);
                 }
             }
         }
@@ -134,7 +129,7 @@ class FabricNetwork {
                 this.tls |= oObj.url.startsWith('grpcs://');
 
                 if (oObj.tlsCACerts && oObj.tlsCACerts.path) {
-                    oObj.tlsCACerts.path = CaliperUtils.resolvePath(oObj.tlsCACerts.path, workspaceRoot);
+                    oObj.tlsCACerts.path = CaliperUtils.resolvePath(oObj.tlsCACerts.path);
                 }
             }
         }
@@ -147,7 +142,7 @@ class FabricNetwork {
                 this.tls |= pObj.url.startsWith('grpcs://');
 
                 if (pObj.tlsCACerts && pObj.tlsCACerts.path) {
-                    pObj.tlsCACerts.path = CaliperUtils.resolvePath(pObj.tlsCACerts.path, workspaceRoot);
+                    pObj.tlsCACerts.path = CaliperUtils.resolvePath(pObj.tlsCACerts.path);
                 }
 
                 if (pObj.eventUrl) {
@@ -164,7 +159,7 @@ class FabricNetwork {
                 this.tls |= caObj.url.startsWith('https://');
 
                 if (caObj.tlsCACerts && caObj.tlsCACerts.path) {
-                    caObj.tlsCACerts.path = CaliperUtils.resolvePath(caObj.tlsCACerts.path, workspaceRoot);
+                    caObj.tlsCACerts.path = CaliperUtils.resolvePath(caObj.tlsCACerts.path);
                 }
             }
         }
@@ -172,14 +167,6 @@ class FabricNetwork {
         if (this.mutualTls && this.compatibilityMode) {
             throw new Error('Mutual TLS is not supported for Fabric v1.0');
         }
-    }
-
-    /**
-     * Gets the configured file wallet path.
-     * @return {string} The file wallet path, or false if omitted.
-     */
-    getFileWalletPath() {
-        return this.network.wallet || false;
     }
 
     /**
@@ -322,12 +309,12 @@ class FabricNetwork {
     }
 
     /**
-     * Gets the chaincode names and versions belonging to the given channel.
+     * Gets the contract names and versions belonging to the given channel.
      * @param {string} channel The channel name.
-     * @returns {Set<{id: string, version: string}>} The set of chaincode names.
+     * @returns {Set<{id: string, version: string}>} The set of contract names.
      */
-    getChaincodesOfChannel(channel) {
-        return new Set(this.network.channels[channel].chaincodes.map(cc => {
+    getContractsOfChannel(channel) {
+        return new Set(this.network.channels[channel].contracts.map(cc => {
             return {
                 id: cc.id,
                 version: cc.version
@@ -418,6 +405,40 @@ class FabricNetwork {
     }
 
     /**
+     * Checks if organization wallets are specified
+     * @returns {boolean} boolean value for existence of organization wallets
+     */
+    usesOrganizationWallets() {
+        return CaliperUtils.checkProperty(this.network, 'organizationWallets') && (Object.getOwnPropertyNames(this.network.organizationWallets).length !== 0);
+    }
+
+    /**
+     * Gets the path to the wallet being used by the given organization.
+     * @param {string} org The organization name.
+     * @returns {string} The resolved wallet path.
+     */
+    getWalletPathForOrganization(org) {
+        if (this.usesOrganizationWallets()) {
+            if (CaliperUtils.checkProperty(this.network.organizationWallets, org)) {
+                const walletObject = this.network.organizationWallets[org];
+                return CaliperUtils.resolvePath(walletObject.path);
+            }
+        }
+
+        return undefined;
+    }
+
+    /**
+     * Gets the path to the wallet being used by the given client.
+     * @param {string} client The client name.
+     * @returns {string} The resolved wallet path.
+     */
+    getWalletPathForClient(client) {
+        const org = this.getOrganizationOfClient(client);
+        return this.getWalletPathForOrganization(org);
+    }
+
+    /**
      * Gets the raw configuration object for the given client.
      *
      * Use it only when you need access to the client objects itself (which is rare)!!
@@ -475,14 +496,14 @@ class FabricNetwork {
     }
 
     /**
-     * Constructs an N-of-N endorsement policy for the given chaincode of the given channel.
+     * Constructs an N-of-N endorsement policy for the given contract of the given channel.
      * @param {string} channel The name of the channel.
-     * @param {{id: string, version: string}} chaincodeInfo The chaincode name and version.
+     * @param {{id: string, version: string}} contractInfo The contract name and version.
      * @return {object} The assembled endorsement policy.
      * @private
      */
-    getDefaultEndorsementPolicy(channel, chaincodeInfo) {
-        const targetPeers = this.getTargetPeersOfChaincodeOfChannel(chaincodeInfo, channel);
+    getDefaultEndorsementPolicy(channel, contractInfo) {
+        const targetPeers = this.getTargetPeersOfContractOfChannel(contractInfo, channel);
         const targetOrgs = new Set();
 
         for (const peer of targetPeers) {
@@ -792,16 +813,16 @@ class FabricNetwork {
     }
 
     /**
-     * Gets the peer names on which the given chaincode of the given channel should be installed and instantiated.
-     * @param {{id: string, version: string}} chaincodeInfo The chaincode name and version.
+     * Gets the peer names on which the given contract of the given channel should be installed and instantiated.
+     * @param {{id: string, version: string}} contractInfo The contract name and version.
      * @param {string} channel The channel name.
      * @returns {Set<string>} The set of peer names.
      */
-    getTargetPeersOfChaincodeOfChannel(chaincodeInfo, channel) {
-        const cc = this.network.channels[channel].chaincodes.find(
-            cc => cc.id === chaincodeInfo.id && cc.version === chaincodeInfo.version);
+    getTargetPeersOfContractOfChannel(contractInfo, channel) {
+        const cc = this.network.channels[channel].contracts.find(
+            cc => cc.id === contractInfo.id && cc.version === contractInfo.version);
 
-        CaliperUtils.assertDefined(cc, `Could not find the following chaincode in the configuration: ${chaincodeInfo.id}@${chaincodeInfo.version}`);
+        CaliperUtils.assertDefined(cc, `Could not find the following contract in the configuration: ${contractInfo.id}@${contractInfo.version}`);
         // targets are explicitly defined
         if (CaliperUtils.checkProperty(cc, 'targetPeers')) {
             return new Set(cc.targetPeers);
@@ -864,16 +885,16 @@ class FabricNetwork {
     }
 
     /**
-     * Gets the transient map for the given chaincode for the given channel.
-     * @param {{id: string, version: string}} chaincode The chaincode name and version.
+     * Gets the transient map for the given contract for the given channel.
+     * @param {{id: string, version: string}} contract The contract name and version.
      * @param {string} channel The channel name.
      *
      * @return {Map<string, Buffer>} The map of attribute names to byte arrays.
      */
-    getTransientMapOfChaincodeOfChannel(chaincode, channel) {
+    getTransientMapOfContractOfChannel(contract, channel) {
         const map = {};
-        const cc = this.network.channels[channel].chaincodes.find(
-            cc => cc.id === chaincode.id && cc.version === chaincode.version);
+        const cc = this.network.channels[channel].contracts.find(
+            cc => cc.id === contract.id && cc.version === contract.version);
 
         if (!CaliperUtils.checkProperty(cc, 'initTransientMap')) {
             return map;

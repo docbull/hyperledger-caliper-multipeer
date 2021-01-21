@@ -42,7 +42,7 @@ module.exports.addBatchAssets = async function(bcObj, context, clientIdx, args, 
         // define the asset to be created in this loop
         const baseAsset = {};
         baseAsset.docType = 'fixed-asset';
-        baseAsset.bytesize = size;
+        baseAsset.byteSize = size;
         baseAsset.creator = 'client' + clientIdx;
         baseAsset.uuid = uuidBase;
 
@@ -64,7 +64,7 @@ module.exports.addBatchAssets = async function(bcObj, context, clientIdx, args, 
         for (let i=0; i<testAssetNum; i++) {
             const asset = {};
             asset.docType = baseAsset.docType;
-            asset.bytesize = baseAsset.bytesize;
+            asset.byteSize = baseAsset.byteSize;
             asset.creator = baseAsset.creator;
             asset.content = baseAsset.content;
             asset.uuid = uuidBase + i;
@@ -86,18 +86,21 @@ module.exports.addBatchAssets = async function(bcObj, context, clientIdx, args, 
                 let myArgs;
                 if(!isPrivateData) {
                     myArgs = {
-                        chaincodeFunction: 'createAssetsFromBatch',
-                        chaincodeArguments: [JSON.stringify(batch)]
+                        contractFunction: 'createAssetsFromBatch',
+                        contractArguments: [JSON.stringify(batch)]
                     };
                 } else {
                     myArgs = {
-                        chaincodeFunction: 'createPrivateAssetsFromBatch',
-                        chaincodeArguments: ['50'],
+                        contractFunction: 'createPrivateAssetsFromBatch',
+                        contractArguments: ['50'],
                         transientMap: {content: JSON.stringify(batch)}
                     }
                 }
 
-                await bcObj.invokeSmartContract(context, 'fixed-asset', undefined, myArgs, undefined, false);
+                myArgs.contractId = 'fixed-asset';
+                myArgs.readOnly = false;
+
+                await bcObj.sendRequests(myArgs);
             } catch (err) {
                 console.error('Error: ', err);
                 throw err;
@@ -127,7 +130,7 @@ module.exports.addMixedBatchAssets = async function(bcObj, context, clientIdx, a
         // define the asset to be created in this loop
         const baseAsset = {};
         baseAsset.docType = 'fixed-asset';
-        baseAsset.bytesize = size;
+        baseAsset.byteSize = size;
         baseAsset.creator = 'client' + clientIdx;
         baseAsset.uuid = uuidBase;
 
@@ -154,7 +157,7 @@ module.exports.addMixedBatchAssets = async function(bcObj, context, clientIdx, a
         // loop over baseAssets defined above
         const asset = {};
         asset.docType = baseAssets[idx].docType;
-        asset.bytesize = baseAssets[idx].bytesize;
+        asset.byteSize = baseAssets[idx].byteSize;
         asset.creator = baseAssets[idx].creator;
         asset.content = baseAssets[idx].content;
         asset.uuid = uuidBase + i;
@@ -176,10 +179,11 @@ module.exports.addMixedBatchAssets = async function(bcObj, context, clientIdx, a
         const batch = batches[index];
         try {
             const myArgs = {
-                chaincodeFunction: 'createAssetsFromBatch',
-                chaincodeArguments: [JSON.stringify(batch)]
+                contractId: 'fixed-asset',
+                contractFunction: 'createAssetsFromBatch',
+                contractArguments: [JSON.stringify(batch)]
             };
-            await bcObj.invokeSmartContract(context, 'fixed-asset', undefined, myArgs, undefined, false);
+            await bcObj.sendRequests(myArgs);
         } catch (err) {
             console.error('Error: ', err);
             throw err;

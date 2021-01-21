@@ -20,11 +20,11 @@ mutual-tls: false
 caliper:
   blockchain: fabric
   command:
-    start: export FABRIC_VERSION=1.4.8;export FABRIC_CA_VERSION=1.4.8;docker-compose -f networks/fabric/docker-compose/2org1peergoleveldb_solo_raft/docker-compose-tls.yaml up -d;sleep 10s
+    start: export FABRIC_VERSION=1.4.4;export FABRIC_CA_VERSION=1.4.4;docker-compose -f networks/fabric/docker-compose/2org1peergoleveldb_solo_raft/docker-compose-tls.yaml up -d;sleep 10s
     end: docker-compose -f networks/fabric/docker-compose/2org1peergoleveldb_solo_raft/docker-compose-tls.yaml down;(test -z \"$(docker ps -aq)\") || docker rm $(docker ps -aq);(test -z \"$(docker images dev* -q)\") || docker rmi $(docker images dev* -q);rm -rf /tmp/hfc-*
 
 info:
-  Version: 1.4.8
+  Version: 2.0.0
   Size: 2 Orgs with 1 Peer
   Orderer: Raft
   Distribution: Single Host
@@ -65,30 +65,10 @@ channels:
     peers:
       peer0.org1.example.com:
         eventSource: true
-      peer1.org1.example.com:
-        eventSource: true
-      peer2.org1.example.com:
-        eventSource: true
-      peer3.org1.example.com:
-        eventSource: true
-      peer4.org1.example.com:
-        eventSource: true
-      peer5.org1.example.com:
-        eventSource: true
-      peer6.org1.example.com:
-        eventSource: true
-      peer7.org1.example.com:
-        eventSource: true
-      peer8.org1.example.com:
-        eventSource: true
-      peer9.org1.example.com:
-        eventSource: true
-      peer10.org1.example.com:
-        eventSource: true
       peer0.org2.example.com:
         eventSource: true
 
-    chaincodes:
+    contracts:
     - id: marbles
       version: v0
       language: golang
@@ -112,16 +92,6 @@ organizations:
     mspid: Org1MSP
     peers:
     - peer0.org1.example.com
-    - peer1.org1.example.com
-    - peer2.org1.example.com
-    - peer3.org1.example.com
-    - peer4.org1.example.com
-    - peer5.org1.example.com
-    - peer6.org1.example.com
-    - peer7.org1.example.com
-    - peer8.org1.example.com
-    - peer9.org1.example.com
-    - peer10.org1.example.com
     certificateAuthorities:
     - ca.org1.example.com
     adminPrivateKey:
@@ -156,86 +126,6 @@ peers:
       grpc.keepalive_time_ms: 600000
     tlsCACerts:
         path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
-
-  peer1.org1.example.com:
-    url: grpcs://localhost:9051
-    grpcOptions:
-      ssl-target-name-override: peer1.org1.example.com
-      grpc.keepalive_time_ms: 600000
-    tlsCACerts:
-        path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
-
-  peer2.org1.example.com:
-    url: grpcs://localhost:10051
-    grpcOptions:
-      ssl-target-name-override: peer2.org1.example.com
-      grpc.keepalive_time_ms: 600000
-    tlsCACerts:
-        path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer2.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
-
-  peer3.org1.example.com:
-    url: grpcs://localhost:11051
-    grpcOptions:
-      ssl-target-name-override: peer3.org1.example.com
-      grpc.keepalive_time_ms: 600000
-    tlsCACerts:
-        path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer3.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
-
-  peer4.org1.example.com:
-    url: grpcs://localhost:12051
-    grpcOptions:
-      ssl-target-name-override: peer4.org1.example.com
-      grpc.keepalive_time_ms: 600000
-    tlsCACerts:
-        path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer4.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
-
-  peer5.org1.example.com:
-    url: grpcs://localhost:13051
-    grpcOptions:
-      ssl-target-name-override: peer5.org1.example.com
-      grpc.keepalive_time_ms: 600000
-    tlsCACerts:
-        path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer5.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
-
-  peer6.org1.example.com:
-      url: grpcs://localhost:14051
-      grpcOptions:
-        ssl-target-name-override: peer6.org1.example.com
-        grpc.keepalive_time_ms: 600000
-      tlsCACerts:
-          path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer6.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
-
-  peer7.org1.example.com:
-      url: grpcs://localhost:15051
-      grpcOptions:
-        ssl-target-name-override: peer7.org1.example.com
-        grpc.keepalive_time_ms: 600000
-      tlsCACerts:
-          path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer7.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
-
-  peer8.org1.example.com:
-    url: grpcs://localhost:16051
-    grpcOptions:
-      ssl-target-name-override: peer8.org1.example.com
-      grpc.keepalive_time_ms: 600000
-    tlsCACerts:
-        path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer8.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
-
-  peer9.org1.example.com:
-    url: grpcs://localhost:17051
-    grpcOptions:
-      ssl-target-name-override: peer9.org1.example.com
-      grpc.keepalive_time_ms: 600000
-    tlsCACerts:
-        path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer9.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
-
-  peer10.org1.example.com:
-    url: grpcs://localhost:18051
-    grpcOptions:
-      ssl-target-name-override: peer10.org1.example.com
-      grpc.keepalive_time_ms: 600000
-    tlsCACerts:
-        path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer10.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
 
   peer0.org2.example.com:
     url: grpcs://localhost:8051

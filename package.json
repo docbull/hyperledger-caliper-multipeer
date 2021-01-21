@@ -18,10 +18,9 @@
   },
   "homepage": "https://github.com/hyperledger/caliper-benchmarks#readme",
   "dependencies": {
-    "@hyperledger/caliper-cli": "^0.3.2",
-    "fabric-client": "^1.4.8",
-    "fabric-network": "^1.4.8",
+    "@hyperledger/caliper-cli": "^0.4.0",
+    "fabric-client": "^1.4.11",
+    "fabric-network": "^1.4.11",
     "fabric-protos": "^2.0.0-snapshot.1"
-  },
-  "devDependencies": {}
+  }
 }

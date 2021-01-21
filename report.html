@@ -127,16 +127,14 @@
                 <h3>&nbspBasic information</h3>
                 <li>DLT: &nbsp<span style="font-weight: 500;">fabric</span></li>
                 <li>Name: &nbsp<span style="font-weight: 500;">simple</span></li>
-                <li>Description: &nbsp<span style="font-weight: 500;">This is an example benchmark for caliper, to test the backend DLT&#39;s performance with simple account opening &amp; querying transactions</span></li>
-                <li>Benchmark Rounds: &nbsp<span style="font-weight: 500;">3</span></li>
+                <li>Description: &nbsp<span style="font-weight: 500;">This is an example benchmark for Caliper, to test the backend DLT&#39;s performance with simple account opening &amp; querying transactions.</span></li>
+                <li>Benchmark Rounds: &nbsp<span style="font-weight: 500;">1</span></li>
                 <li><a href="#benchmarkInfo">Details</a></li>
             </ul>
             <ul>
                 <h3>&nbspBenchmark results</h3>
                 <li><a href="#benchmarksummary">Summary</a></li>
                     <li><a href="#open">open</a></li>
-                    <li><a href="#query">query</a></li>
-                    <li><a href="#transfer">transfer</a></li>
             </ul>
             <ul>
                 <h3>&nbspSystem under test</h3>
@@ -159,23 +157,17 @@
                     </tr>
 
                     <tr>
-                         <td>open</td> <td>500</td> <td>0</td> <td>226.9</td> <td>4.29</td> <td>2.63</td> <td>3.44</td> <td>102.7</td>
-                    </tr>
-                    <tr>
-                         <td>query</td> <td>100</td> <td>0</td> <td>101.3</td> <td>0.02</td> <td>0.00</td> <td>0.00</td> <td>101.0</td>
-                    </tr>
-                    <tr>
-                         <td>transfer</td> <td>436</td> <td>564</td> <td>259.5</td> <td>5.46</td> <td>1.88</td> <td>3.67</td> <td>61.4</td>
+                         <td>open</td> <td>1000</td> <td>0</td> <td>389.9</td> <td>5.30</td> <td>1.44</td> <td>3.60</td> <td>191.7</td>
                     </tr>
                 </table>
             </div>
             <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="open">
                 <h2>Benchmark round: open</h2>
-                <p>Test description for the opening of an account through the deployed chaincode</p>
+                <p>Test description for the opening of an account through the deployed contract.</p>
                 <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
   type: fixed-rate
   opts:
-    tps: 500
+    tps: 1000
 </pre>
                         <h3>Performance metrics for open</h3>
                             <table style="min-width: 100%;">
@@ -183,50 +175,10 @@
                                      <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
                                 </tr>
                                 <tr>
-                                     <td>open</td> <td>500</td> <td>0</td> <td>226.9</td> <td>4.29</td> <td>2.63</td> <td>3.44</td> <td>102.7</td>
+                                     <td>open</td> <td>1000</td> <td>0</td> <td>389.9</td> <td>5.30</td> <td>1.44</td> <td>3.60</td> <td>191.7</td>
                                 </tr>
                             </table>
                         <h3>Resource utilization for open</h3>
-            </div>
-
-            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="query">
-                <h2>Benchmark round: query</h2>
-                <p>Test description for the query performance of the deployed chaincode</p>
-                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
-  type: fixed-rate
-  opts:
-    tps: 100
-</pre>
-                        <h3>Performance metrics for query</h3>
-                            <table style="min-width: 100%;">
-                                <tr>
-                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
-                                </tr>
-                                <tr>
-                                     <td>query</td> <td>100</td> <td>0</td> <td>101.3</td> <td>0.02</td> <td>0.00</td> <td>0.00</td> <td>101.0</td>
-                                </tr>
-                            </table>
-                        <h3>Resource utilization for query</h3>
-            </div>
-
-            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="transfer">
-                <h2>Benchmark round: transfer</h2>
-                <p>Test description for transfering money between accounts</p>
-                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
-  type: fixed-rate
-  opts:
-    tps: 1000
-</pre>
-                        <h3>Performance metrics for transfer</h3>
-                            <table style="min-width: 100%;">
-                                <tr>
-                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
-                                </tr>
-                                <tr>
-                                     <td>transfer</td> <td>436</td> <td>564</td> <td>259.5</td> <td>5.46</td> <td>1.88</td> <td>3.67</td> <td>61.4</td>
-                                </tr>
-                            </table>
-                        <h3>Resource utilization for transfer</h3>
             </div>
 
             <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;">
@@ -234,8 +186,8 @@
                 <h3>benchmark config</h3>
                 <pre id="benchmarkInfo" style="overflow: visible;white-space: pre-wrap;max-height:100%;">name: simple
 description: &gt;-
-  This is an example benchmark for caliper, to test the backend DLT&#39;s
-  performance with simple account opening &amp; querying transactions
+  This is an example benchmark for Caliper, to test the backend DLT&#39;s
+  performance with simple account opening &amp; querying transactions.
 workers:
   type: local
   number: 1
@@ -243,33 +195,18 @@ rounds:
   - label: open
     description: &gt;-
       Test description for the opening of an account through the deployed
-      chaincode
-    txNumber: 500
-    rateControl:
-      type: fixed-rate
-      opts:
-        tps: 500
-    arguments:
-      money: 10000
-    callback: benchmarks&#x2F;scenario&#x2F;simple&#x2F;open.js
-  - label: query
-    description: Test description for the query performance of the deployed chaincode
-    txNumber: 100
-    rateControl:
-      type: fixed-rate
-      opts:
-        tps: 100
-    callback: benchmarks&#x2F;scenario&#x2F;simple&#x2F;query.js
-  - label: transfer
-    description: Test description for transfering money between accounts
+      contract.
     txNumber: 1000
     rateControl:
       type: fixed-rate
       opts:
         tps: 1000
-    arguments:
-      money: 10000
-    callback: benchmarks&#x2F;scenario&#x2F;simple&#x2F;transfer.js
+    workload:
+      module: benchmarks&#x2F;scenario&#x2F;simple&#x2F;open.js
+      arguments:
+        initialMoney: 10000
+        moneyToTransfer: 100
+        numberOfAccounts: 1000
 </pre>
                 <h3>SUT</h3>
                 <pre id="sutdetails">not provided</pre>

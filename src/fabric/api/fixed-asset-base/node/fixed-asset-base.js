@@ -62,7 +62,7 @@ const FixedAssetBase = class {
      * {
      *   uuid: unique identifier
      *   creator: the creator
-     *   bytesize: target bytesize of asset
+     *   byteSize: target byteSize of asset
      *   content: variable content
      * }
      * Directly writes the string content against the passed uuid
@@ -86,7 +86,7 @@ const FixedAssetBase = class {
      * {
      *   uuid: unique identifier
      *   creator: the creator
-     *   bytesize: target bytesize of asset
+     *   byteSize: target byteSize of asset
      *   content: variable content
      * }
      * The body is parsed to include a step where the body is an object
@@ -109,7 +109,7 @@ const FixedAssetBase = class {
      * [{
      *   uuid: unique identifier
      *   creator: the creator
-     *   bytesize: target bytesize of asset
+     *   byteSize: target byteSize of asset
      *   content: variable content
      * }, ...]
      * @param {*} stub 
@@ -239,7 +239,7 @@ const FixedAssetBase = class {
         const response = {};
         const pageSize = parseInt(pagesize, 10);
 
-        if (bookmark.length > 0) {
+        if (bookmark && bookmark.length > 0) {
             const { iterator, metadata } = await stub.getQueryResultWithPagination(queryString, pageSize, bookmark);
             response.results = await this.getAllResults(iterator);
             response.responseMetadata = {
@@ -312,7 +312,7 @@ const FixedAssetBase = class {
         const response = {};
         const pageSize = parseInt(pagesize, 10);
 
-        if (bookmark.length > 0) {
+        if (bookmark && bookmark.length > 0) {
             const { iterator, metadata } = await stub.getStateByRangeWithPagination(startKey,endKey, pageSize, bookmark);
             response.results = await this.getAllResults(iterator);
             response.responseMetadata = {

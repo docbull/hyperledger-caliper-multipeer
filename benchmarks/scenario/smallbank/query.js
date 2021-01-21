@@ -14,34 +14,46 @@
 
 'use strict';
 
-module.exports.info  = 'querying accounts';
+const OperationBase = require('./utils/operation-base');
+const Smallbank = require('./utils/smallbank');
 
-
-let bc, contx;
-let accounts;
-module.exports.init = function(blockchain, context, args) {
-    let acc = require('./smallbankOperations.js');
-    bc       = blockchain;
-    contx    = context;
-    accounts = acc.account_array;
-    return Promise.resolve();
-};
-
-module.exports.run = function() {
-    let acc_num  = accounts[Math.floor(Math.random()*(accounts.length))];
-    if (bc.getType() === 'fabric') {
-        let args = {
-            chaincodeFunction: 'query',
-            chaincodeArguments: [acc_num.toString()],
-        };
-        return bc.bcObj.querySmartContract(contx, 'smallbank', '1.0', args, 3);
-    } else {
-        // NOTE: the query API is inconsistent with the invoke API
-        return bc.queryState(contx, 'smallbank', '1.0', acc_num);
+/**
+ * Workload module for Smallbank queries.
+ */
+class Query extends OperationBase {
+    /**
+     * Initializes the workload module instance.
+     */
+    constructor() {
+        super();
     }
-};
 
-module.exports.end = function() {
-    // do nothing
-    return Promise.resolve();
-};
+    /**
+     * Creates a Smallbank instance initialized for the configured number of accounts.
+     * @return {Smallbank} The instance.
+     * @protected
+     */
+    createSmallbank() {
+        return new Smallbank(this.accounts);
+    }
+
+    /**
+     * Assemble TXs for the round.
+     * @return {Promise<TxStatus[]>}
+     */
+    async submitTransaction() {
+        const queryArgs = this.smallbank.getQueryArguments();
+        const request = this.createConnectorRequest('query', queryArgs);
+        await this.sutAdapter.sendRequests(request);
+    }
+}
+
+/**
+ * Create a new instance of the workload module.
+ * @return {WorkloadModuleInterface}
+ */
+function createWorkloadModule() {
+    return new Query();
+}
+
+module.exports.createWorkloadModule = createWorkloadModule;

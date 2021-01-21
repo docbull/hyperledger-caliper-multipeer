@@ -22,22 +22,25 @@ let owners = ['Tomoko', 'Brad', 'Jin Soo', 'Max', 'Adrianna', 'Michel', 'Aarav',
 let carNumber;
 let txIndex = 0;
 
-module.exports.createCar = async function (bc, contx, args, color, make, model, owner) {
+module.exports.createCar = async function (bc, workerIndex, args) {
 
     while (txIndex < args.assets) {
         txIndex++;
-        carNumber = 'Client' + contx.clientIdx + '_CAR' + txIndex.toString();
+        carNumber = 'Client' + workerIndex + '_CAR' + txIndex.toString();
         color = colors[Math.floor(Math.random() * colors.length)];
         make = makes[Math.floor(Math.random() * makes.length)];
         model = models[Math.floor(Math.random() * models.length)];
         owner = owners[Math.floor(Math.random() * owners.length)];
-    
+
         let myArgs = {
-            chaincodeFunction: 'createCar',
-            chaincodeArguments: [carNumber, make, model, color, owner]
+            contractId: 'fabcar',
+            contractVersion: 'v1',
+            contractFunction: 'createCar',
+            contractArguments: [carNumber, make, model, color, owner],
+            timeout: 30
         };
-    
-        await bc.invokeSmartContract(contx, 'fabcar', 'v1', myArgs, 30);
+
+        await bc.sendRequests(myArgs);
     }
 
 };

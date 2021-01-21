@@ -14,38 +14,45 @@
 
 'use strict';
 
-module.exports.info  = 'querying accounts';
+const OperationBase = require('./utils/operation-base');
+const SimpleState = require('./utils/simple-state');
 
+/**
+ * Workload module for querying various accounts.
+ */
+class Query extends OperationBase {
 
-let bc, contx;
-let account_array;
-
-module.exports.init = function(blockchain, context, args) {
-    const open = require('./open.js');
-    bc       = blockchain;
-    contx    = context;
-    account_array = open.account_array;
-
-    return Promise.resolve();
-};
-
-module.exports.run = function() {
-    const acc  = account_array[Math.floor(Math.random()*(account_array.length))];
-
-    if (bc.getType() === 'fabric') {
-        let args = {
-            chaincodeFunction: 'query',
-            chaincodeArguments: [acc],
-        };
-
-        return bc.bcObj.querySmartContract(contx, 'simple', 'v0', args, 10);
-    } else {
-        // NOTE: the query API is not consistent with the invoke API
-        return bc.queryState(contx, 'simple', 'v0', acc);
+    /**
+     * Initializes the parameters of the workload.
+     */
+    constructor() {
+        super();
     }
-};
 
-module.exports.end = function() {
-    // do nothing
-    return Promise.resolve();
-};
+    /**
+     * Create a pre-configured state representation.
+     * @return {SimpleState} The state instance.
+     */
+    createSimpleState() {
+        const accountsPerWorker = this.numberOfAccounts / this.totalWorkers;
+        return new SimpleState(this.workerIndex, this.initialMoney, this.moneyToTransfer, accountsPerWorker);
+    }
+
+    /**
+     * Assemble TXs for querying accounts.
+     */
+    async submitTransaction() {
+        const queryArgs = this.simpleState.getQueryArguments();
+        await this.sutAdapter.sendRequests(this.createConnectorRequest('query', queryArgs));
+    }
+}
+
+/**
+ * Create a new instance of the workload module.
+ * @return {WorkloadModuleInterface}
+ */
+function createWorkloadModule() {
+    return new Query();
+}
+
+module.exports.createWorkloadModule = createWorkloadModule;

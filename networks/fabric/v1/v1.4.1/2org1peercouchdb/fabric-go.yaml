@@ -20,11 +20,11 @@ mutual-tls: false
 caliper:
   blockchain: fabric
   command:
-    start: export FABRIC_VERSION=1.4.8;export FABRIC_CA_VERSION=1.4.8;docker-compose -f networks/fabric/docker-compose/2org1peercouchdb/docker-compose.yaml up -d;sleep 3s
+    start: export FABRIC_VERSION=1.4.1;export FABRIC_CA_VERSION=1.4.1;docker-compose -f networks/fabric/docker-compose/2org1peercouchdb/docker-compose.yaml up -d;sleep 3s
     end: docker-compose -f networks/fabric/docker-compose/2org1peercouchdb/docker-compose.yaml down;(test -z \"$(docker ps -aq)\") || docker rm $(docker ps -aq);(test -z \"$(docker images dev* -q)\") || docker rmi $(docker images dev* -q);rm -rf /tmp/hfc-*
 
 info:
-  Version: 1.4.8
+  Version: 1.4.1
   Size: 2 Orgs with 1 Peer
   Orderer: Solo
   Distribution: Single Host
@@ -65,30 +65,10 @@ channels:
     peers:
       peer0.org1.example.com:
         eventSource: true
-      peer1.org1.example.com:
-        eventSource: true
-      peer2.org1.example.com:
-        eventSource: true
-      peer3.org1.example.com:
-        eventSource: true
-      peer4.org1.example.com:
-        eventSource: true
-      peer5.org1.example.com:
-        eventSource: true
-      peer6.org1.example.com:
-        eventSource: true
-      peer7.org1.example.com:
-        eventSource: true
-      peer8.org1.example.com:
-        eventSource: true
-      peer9.org1.example.com:
-        eventSource: true
-      peer10.org1.example.com:
-        eventSource: true
       peer0.org2.example.com:
         eventSource: true
 
-    chaincodes:
+    contracts:
     - id: marbles
       version: v0
       language: golang
@@ -112,16 +92,6 @@ organizations:
     mspid: Org1MSP
     peers:
     - peer0.org1.example.com
-    - peer1.org1.example.com
-    - peer2.org1.example.com
-    - peer3.org1.example.com
-    - peer4.org1.example.com
-    - peer5.org1.example.com
-    - peer6.org1.example.com
-    - peer7.org1.example.com
-    - peer8.org1.example.com
-    - peer9.org1.example.com
-    - peer10.org1.example.com
     certificateAuthorities:
     - ca.org1.example.com
     adminPrivateKey:
@@ -151,83 +121,6 @@ peers:
     url: grpc://localhost:7051
     grpcOptions:
       ssl-target-name-override: peer0.org1.example.com
-      grpc.keepalive_time_ms: 600000
-
-peers:
-  peer0.org1.example.com:
-    url: grpc://localhost:7051
-    grpcOptions:
-      ssl-target-name-override: peer0.org1.example.com
-      grpc.keepalive_time_ms: 600000
-
-peers:
-  peer1.org1.example.com:
-    url: grpc://localhost:9051
-    grpcOptions:
-      ssl-target-name-override: peer1.org1.example.com
-      grpc.keepalive_time_ms: 600000
-
-peers:
-  peer2.org1.example.com:
-    url: grpc://localhost:10051
-    grpcOptions:
-      ssl-target-name-override: peer2.org1.example.com
-      grpc.keepalive_time_ms: 600000
-
-peers:
-  peer3.org1.example.com:
-    url: grpc://localhost:11051
-    grpcOptions:
-      ssl-target-name-override: peer3.org1.example.com
-      grpc.keepalive_time_ms: 600000
-
-peers:
-  peer4.org1.example.com:
-    url: grpc://localhost:12051
-    grpcOptions:
-      ssl-target-name-override: peer4.org1.example.com
-      grpc.keepalive_time_ms: 600000
-
-peers:
-  peer5.org1.example.com:
-    url: grpc://localhost:13051
-    grpcOptions:
-      ssl-target-name-override: peer5.org1.example.com
-      grpc.keepalive_time_ms: 600000
-
-peers:
-  peer6.org1.example.com:
-    url: grpc://localhost:14051
-    grpcOptions:
-      ssl-target-name-override: peer6.org1.example.com
-      grpc.keepalive_time_ms: 600000
-
-peers:
-  peer7.org1.example.com:
-    url: grpc://localhost:15051
-    grpcOptions:
-      ssl-target-name-override: peer7.org1.example.com
-      grpc.keepalive_time_ms: 600000
-
-peers:
-  peer8.org1.example.com:
-    url: grpc://localhost:16051
-    grpcOptions:
-      ssl-target-name-override: peer8.org1.example.com
-      grpc.keepalive_time_ms: 600000
-
-peers:
-  peer9.org1.example.com:
-    url: grpc://localhost:17051
-    grpcOptions:
-      ssl-target-name-override: peer9.org1.example.com
-      grpc.keepalive_time_ms: 600000
-
-peers:
-  peer10.org1.example.com:
-    url: grpc://localhost:18051
-    grpcOptions:
-      ssl-target-name-override: peer10.org1.example.com
       grpc.keepalive_time_ms: 600000
 
   peer0.org2.example.com:
