@@ -11,8 +11,8 @@ SEQUENCE=$(seq 0 20)
 for i in $SEQUENCE
 do
     rand=$(((RANDOM % 80) + 20))
-    NET_DELAY=${rand}ms
-    docker exec peer${i}.org1.example.com tc qdisc del dev eth0 root
+    NET_DELAY=${rand}
+    #docker exec peer${i}.org1.example.com tc qdisc del dev eth0 root
     docker exec peer${i}.org1.example.com tc qdisc add dev eth0 root netem delay $NET_DELAY
-    echo "peer${i} : $NET_DELAY"
+    echo "$NET_DELAY"
 done

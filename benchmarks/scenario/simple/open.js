@@ -44,7 +44,7 @@ class Open extends OperationBase {
         const result = await this.sutAdapter.sendRequests(this.createConnectorRequest('open', createArgs));
 
         let executionTime = result.GetTimeFinal() - result.GetTimeCreate();
-        console.log("Transaction confirmation time: " + executionTime);
+        console.log(executionTime);
     }
 }
 
