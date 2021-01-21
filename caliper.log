@@ -12775,3 +12775,109 @@ Searched paths: /home/inlab/caliper-benchmarks/node_modules/@hyperledger/caliper
 2021.01.21-20:23:13.165[32m info [39m [caliper] [round-orchestrator] 	Benchmark finished in 0.003 seconds. Total rounds: 1. Successful rounds: 0. Failed rounds: 1.
 2021.01.21-20:23:13.165[32m info [39m [caliper] [caliper-utils] 	Executing command: cd .; docker-compose -f networks/fabric/docker-compose/2org1peercouchdb_solo_raft/docker-compose-tls.yaml down;(test -z \"$(docker ps -aq)\") || docker rm $(docker ps -aq);(test -z \"$(docker images dev* -q)\") || docker rmi $(docker images dev* -q);rm -rf /tmp/hfc-*
 2021.01.21-20:23:41.831[32m info [39m [caliper] [caliper-engine] 	Executed end command in 28.666 seconds
+2021.01.21-20:32:52.527[90m debug[39m [caliper] [rateControl.js] 	Constructed a winston logger with the specified settings
+2021.01.21-20:32:52.616[32m info [39m [caliper] [cli-launch-manager] 	Set workspace path: /home/inlab/hyperledger-caliper-multipeer
+2021.01.21-20:32:52.617[32m info [39m [caliper] [cli-launch-manager] 	Set benchmark configuration path: /home/inlab/hyperledger-caliper-multipeer/benchmarks/scenario/simple/config.yaml
+2021.01.21-20:32:52.617[32m info [39m [caliper] [cli-launch-manager] 	Set network configuration path: /home/inlab/hyperledger-caliper-multipeer/networks/fabric/v1/v1.4.4/2org1peercouchdb_raft/fabric-go-tls-solo.yaml
+2021.01.21-20:32:52.617[32m info [39m [caliper] [cli-launch-manager] 	Set SUT type: fabric
+2021.01.21-20:32:52.635[32m info [39m [caliper] [benchmark-validator] 	No observer specified, will default to `none`
+2021.01.21-20:32:52.635[32m info [39m [caliper] [caliper-engine] 	Starting benchmark flow
+2021.01.21-20:32:52.884[32m info [39m [caliper] [fabric-connector] 	Initializing standard connector compatible with installed SDK: 1.4.11
+2021.01.21-20:32:52.889[90m debug[39m [caliper] [config-validator] 	Entering validateNetwork
+2021.01.21-20:32:52.889[90m debug[39m [caliper] [config-validator] 	Entering _validateTopLevel with discovery "false" and tls "undefined"
+2021.01.21-20:32:52.891[90m debug[39m [caliper] [config-validator] 	Exiting validateNetwork
+2021.01.21-20:32:52.891[90m debug[39m [caliper] [config-validator] 	Entering validateCertificateAuthority
+2021.01.21-20:32:52.895[90m debug[39m [caliper] [config-validator] 	Exiting validateCertificateAuthority
+2021.01.21-20:32:52.895[90m debug[39m [caliper] [config-validator] 	Entering validateCertificateAuthority
+2021.01.21-20:32:52.896[90m debug[39m [caliper] [config-validator] 	Exiting validateCertificateAuthority
+2021.01.21-20:32:52.896[90m debug[39m [caliper] [config-validator] 	Entering validateOrderer with tls "true"
+2021.01.21-20:32:52.896[90m debug[39m [caliper] [config-validator] 	Exiting validateOrderer
+2021.01.21-20:32:52.897[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "undefined"
+2021.01.21-20:32:52.897[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.897[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.897[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.897[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.898[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.898[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.898[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.898[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.898[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.898[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.899[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.899[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.899[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.899[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.901[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.901[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.901[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.901[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.902[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.902[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.902[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.902[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.902[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.902[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.903[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.903[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.903[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.903[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.903[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.903[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.904[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.904[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.904[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.904[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.904[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.905[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.905[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.905[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.905[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.905[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.906[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.906[90m debug[39m [caliper] [config-validator] 	Entering validatePeer with tls "true" and eventUrl "false"
+2021.01.21-20:32:52.906[90m debug[39m [caliper] [config-validator] 	Exiting validatePeer
+2021.01.21-20:32:52.906[90m debug[39m [caliper] [config-validator] 	Entering validateOrganization
+2021.01.21-20:32:52.907[90m debug[39m [caliper] [config-validator] 	Exiting validateOrganization
+2021.01.21-20:32:52.907[90m debug[39m [caliper] [config-validator] 	Entering validateOrganization
+2021.01.21-20:32:52.907[90m debug[39m [caliper] [config-validator] 	Exiting validateOrganization
+2021.01.21-20:32:52.907[90m debug[39m [caliper] [config-validator] 	Entering validateClient with validOrgs ["Org1","Org2"] and hasOrgWallet "false"
+2021.01.21-20:32:52.908[90m debug[39m [caliper] [config-validator] 	Exiting validateClient
+2021.01.21-20:32:52.908[90m debug[39m [caliper] [config-validator] 	Entering validateClient with validOrgs ["Org1","Org2"] and hasOrgWallet "false"
+2021.01.21-20:32:52.909[90m debug[39m [caliper] [config-validator] 	Exiting validateClient
+2021.01.21-20:32:52.909[90m debug[39m [caliper] [config-validator] 	Entering validateChannel
+2021.01.21-20:32:52.915[90m debug[39m [caliper] [config-validator] 	Exiting validateChannel
+2021.01.21-20:32:52.915[90m debug[39m [caliper] [config-validator] 	Entering _validateTopLevel with discovery "false" and tls "true"
+2021.01.21-20:32:52.915[90m debug[39m [caliper] [config-validator] 	Exiting validateNetwork
+2021.01.21-20:32:52.915[90m debug[39m [caliper] [config-validator] 	Exiting validateNetwork
+2021.01.21-20:32:52.974[32m info [39m [caliper] [caliper-utils] 	Executing command: cd .; export FABRIC_VERSION=1.4.8;export FABRIC_CA_VERSION=1.4.8;docker-compose -f networks/fabric/docker-compose/2org1peercouchdb_solo_raft/docker-compose-tls.yaml up -d;sleep 5s
+2021.01.21-20:33:05.077[32m info [39m [caliper] [caliper-engine] 	Executed start command in 12.103 seconds
+2021.01.21-20:33:05.078[32m info [39m [caliper] [connectors/v1/fabric] 	Fabric SDK version: 1.4.11; TLS: server
+2021.01.21-20:33:05.385[32m info [39m [caliper] [connectors/v1/fabric] 	Org1's registrar enrolled successfully
+2021.01.21-20:33:05.515[32m info [39m [caliper] [connectors/v1/fabric] 	Org2's registrar enrolled successfully
+2021.01.21-20:33:05.521[32m info [39m [caliper] [connectors/v1/fabric] 	Org1's admin's materials are successfully loaded
+2021.01.21-20:33:05.527[32m info [39m [caliper] [connectors/v1/fabric] 	Org2's admin's materials are successfully loaded
+2021.01.21-20:33:05.530[32m info [39m [caliper] [connectors/v1/fabric] 	client0.org1.example.com's materials are successfully loaded
+2021.01.21-20:33:05.533[32m info [39m [caliper] [connectors/v1/fabric] 	client0.org2.example.com's materials are successfully loaded
+2021.01.21-20:33:05.534[32m info [39m [caliper] [connectors/v1/fabric] 	Channel 'mychannel' definiton being retrieved from file
+2021.01.21-20:33:05.571[32m info [39m [caliper] [connectors/v1/fabric] 	Channel 'mychannel' successfully created
+2021.01.21-20:33:05.571[32m info [39m [caliper] [connectors/v1/fabric] 	Sleeping 5s...
+2021.01.21-20:33:10.938[32m info [39m [caliper] [connectors/v1/fabric] 	Org1's peers successfully joined mychannel: peer0.org1.example.com,peer1.org1.example.com,peer2.org1.example.com,peer3.org1.example.com,peer4.org1.example.com,peer5.org1.example.com,peer6.org1.example.com,peer7.org1.example.com,peer8.org1.example.com,peer9.org1.example.com,peer10.org1.example.com,peer11.org1.example.com,peer12.org1.example.com,peer13.org1.example.com,peer14.org1.example.com,peer15.org1.example.com,peer16.org1.example.com,peer17.org1.example.com,peer18.org1.example.com,peer19.org1.example.com,peer20.org1.example.com
+2021.01.21-20:33:11.034[32m info [39m [caliper] [connectors/v1/fabric] 	Org2's peers successfully joined mychannel: peer0.org2.example.com
+2021.01.21-20:33:11.034[32m info [39m [caliper] [connectors/v1/fabric] 	Sleeping 5s...
+2021.01.21-20:33:16.036[32m info [39m [caliper] [caliper-engine] 	Executed "init" step in 10.957 seconds
+2021.01.21-20:33:16.039[32m info [39m [caliper] [connectors/v1/fabric] 	Installing contracts for mychannel...
+2021.01.21-20:33:16.162[32m info [39m [caliper] [connectors/v1/fabric] 	marbles@v0 successfully installed on Org1's peers: peer0.org1.example.com,peer1.org1.example.com,peer2.org1.example.com,peer3.org1.example.com,peer4.org1.example.com,peer5.org1.example.com,peer6.org1.example.com,peer7.org1.example.com,peer8.org1.example.com,peer9.org1.example.com,peer10.org1.example.com,peer11.org1.example.com,peer12.org1.example.com,peer13.org1.example.com,peer14.org1.example.com,peer15.org1.example.com,peer16.org1.example.com,peer17.org1.example.com,peer18.org1.example.com,peer19.org1.example.com,peer20.org1.example.com
+2021.01.21-20:33:16.192[32m info [39m [caliper] [connectors/v1/fabric] 	marbles@v0 successfully installed on Org2's peers: peer0.org2.example.com
+2021.01.21-20:33:16.253[32m info [39m [caliper] [connectors/v1/fabric] 	drm@v0 successfully installed on Org1's peers: peer0.org1.example.com,peer1.org1.example.com,peer2.org1.example.com,peer3.org1.example.com,peer4.org1.example.com,peer5.org1.example.com,peer6.org1.example.com,peer7.org1.example.com,peer8.org1.example.com,peer9.org1.example.com,peer10.org1.example.com,peer11.org1.example.com,peer12.org1.example.com,peer13.org1.example.com,peer14.org1.example.com,peer15.org1.example.com,peer16.org1.example.com,peer17.org1.example.com,peer18.org1.example.com,peer19.org1.example.com,peer20.org1.example.com
+2021.01.21-20:33:16.258[32m info [39m [caliper] [connectors/v1/fabric] 	drm@v0 successfully installed on Org2's peers: peer0.org2.example.com
+2021.01.21-20:33:16.318[32m info [39m [caliper] [connectors/v1/fabric] 	simple@v0 successfully installed on Org1's peers: peer0.org1.example.com,peer1.org1.example.com,peer2.org1.example.com,peer3.org1.example.com,peer4.org1.example.com,peer5.org1.example.com,peer6.org1.example.com,peer7.org1.example.com,peer8.org1.example.com,peer9.org1.example.com,peer10.org1.example.com,peer11.org1.example.com,peer12.org1.example.com,peer13.org1.example.com,peer14.org1.example.com,peer15.org1.example.com,peer16.org1.example.com,peer17.org1.example.com,peer18.org1.example.com,peer19.org1.example.com,peer20.org1.example.com
+2021.01.21-20:33:16.322[32m info [39m [caliper] [connectors/v1/fabric] 	simple@v0 successfully installed on Org2's peers: peer0.org2.example.com
+2021.01.21-20:33:16.380[32m info [39m [caliper] [connectors/v1/fabric] 	smallbank@v0 successfully installed on Org1's peers: peer0.org1.example.com,peer1.org1.example.com,peer2.org1.example.com,peer3.org1.example.com,peer4.org1.example.com,peer5.org1.example.com,peer6.org1.example.com,peer7.org1.example.com,peer8.org1.example.com,peer9.org1.example.com,peer10.org1.example.com,peer11.org1.example.com,peer12.org1.example.com,peer13.org1.example.com,peer14.org1.example.com,peer15.org1.example.com,peer16.org1.example.com,peer17.org1.example.com,peer18.org1.example.com,peer19.org1.example.com,peer20.org1.example.com
+2021.01.21-20:33:16.384[32m info [39m [caliper] [connectors/v1/fabric] 	smallbank@v0 successfully installed on Org2's peers: peer0.org2.example.com
+2021.01.21-20:33:16.384[32m info [39m [caliper] [connectors/v1/fabric] 	Instantiating marbles@v0 in mychannel. This might take some time...
+2021.01.21-20:33:27.958[32m info [39m [caliper] [connectors/v1/fabric] 	Successfully instantiated marbles@v0 in mychannel
+2021.01.21-20:33:27.959[32m info [39m [caliper] [connectors/v1/fabric] 	Instantiating drm@v0 in mychannel. This might take some time...
+2021.01.21-20:33:39.919[32m info [39m [caliper] [connectors/v1/fabric] 	Successfully instantiated drm@v0 in mychannel
+2021.01.21-20:33:39.920[32m info [39m [caliper] [connectors/v1/fabric] 	Instantiating simple@v0 in mychannel. This might take some time...
+2021.01.21-20:33:47.623[32m info [39m [caliper] [connectors/v1/fabric] 	Successfully instantiated simple@v0 in mychannel
+2021.01.21-20:33:47.625[32m info [39m [caliper] [connectors/v1/fabric] 	Instantiating smallbank@v0 in mychannel. This might take some time...
