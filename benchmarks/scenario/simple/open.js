@@ -43,8 +43,13 @@ class Open extends OperationBase {
         let createArgs = this.simpleState.getOpenAccountArguments();
         const result = await this.sutAdapter.sendRequests(this.createConnectorRequest('open', createArgs));
 
-        let executionTime = result.GetTimeFinal() - result.GetTimeCreate();
-        console.log(executionTime);
+        //let executionTime = result.GetTimeFinal() - result.GetTimeCreate();
+        //console.log(executionTime);
+
+        //let createTime = result.GetTimeCreate();
+        //let finalTime = result.GetTimeFinal();
+        //console.log("created time:" + createTime);
+        //console.log("final time: " + finalTime);
     }
 }
 
