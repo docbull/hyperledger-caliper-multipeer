@@ -21,7 +21,7 @@ caliper:
   blockchain: fabric
   command:
     start: export FABRIC_VERSION=1.4.8;export FABRIC_CA_VERSION=1.4.8;docker-compose -f networks/fabric/docker-compose/2org1peercouchdb_solo_raft/docker-compose-tls.yaml up -d;sleep 5s
-    end: docker-compose -f networks/fabric/docker-compose/2org1peercouchdb_solo_raft/docker-compose-tls.yaml down;(test -z \"$(docker ps -aq)\") || docker rm $(docker ps -aq);(test -z \"$(docker images dev* -q)\") || docker rmi $(docker images dev* -q);rm -rf /tmp/hfc-*
+    end: docker-compose -f networks/fabric/docker-compose/2org1peercouchdb_solo_raft/docker-compose-tls.yaml down;(test -z \"$(docker ps -aq)\") || docker rm $(docker ps -aq);(test -z \"$(docker images dev* -q)\") || docker rmi $(docker images dev* -q) -f;rm -rf /tmp/hfc-*
 
 info:
   Version: 1.4.8
@@ -168,6 +168,31 @@ channels:
         chaincodeQuery: true
         ledgerQuery: true
         eventSource: true
+      peer21.org1.example.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer22.org1.example.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer23.org1.example.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer24.org1.example.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer25.org1.example.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
       peer0.org2.example.com:
         eventSource: true
 
@@ -215,6 +240,11 @@ organizations:
     - peer18.org1.example.com
     - peer19.org1.example.com
     - peer20.org1.example.com
+    - peer21.org1.example.com
+    - peer22.org1.example.com
+    - peer23.org1.example.com
+    - peer24.org1.example.com
+    - peer25.org1.example.com
     certificateAuthorities:
     - ca.org1.example.com
     adminPrivateKey:
@@ -409,6 +439,46 @@ peers:
       grpc.keepalive_time_ms: 600000
     tlsCACerts:
         path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer20.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
+
+  peer21.org1.example.com:
+    url: grpcs://localhost:19151
+    grpcOptions:
+      ssl-target-name-override: peer21.org1.example.com
+      grpc.keepalive_time_ms: 600000
+    tlsCACerts:
+        path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer21.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
+
+  peer22.org1.example.com:
+    url: grpcs://localhost:19251
+    grpcOptions:
+      ssl-target-name-override: peer22.org1.example.com
+      grpc.keepalive_time_ms: 600000
+    tlsCACerts:
+        path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer22.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
+
+  peer23.org1.example.com:
+    url: grpcs://localhost:19351
+    grpcOptions:
+      ssl-target-name-override: peer23.org1.example.com
+      grpc.keepalive_time_ms: 600000
+    tlsCACerts:
+        path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer23.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
+
+  peer24.org1.example.com:
+    url: grpcs://localhost:19451
+    grpcOptions:
+      ssl-target-name-override: peer24.org1.example.com
+      grpc.keepalive_time_ms: 600000
+    tlsCACerts:
+        path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer24.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
+
+  peer25.org1.example.com:
+    url: grpcs://localhost:19551
+    grpcOptions:
+      ssl-target-name-override: peer25.org1.example.com
+      grpc.keepalive_time_ms: 600000
+    tlsCACerts:
+        path: networks/fabric/config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer25.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
 
   peer0.org2.example.com:
     url: grpcs://localhost:8051
