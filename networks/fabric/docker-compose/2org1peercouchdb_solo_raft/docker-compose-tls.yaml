@@ -1143,6 +1143,211 @@ services:
         - orderer0.example.com
         - couchdb.peer25.org1.example.com
 
+#    peer26.org1.example.com:
+#        container_name: peer26.org1.example.com
+#        image: hyperledger/fabric-peer:${FABRIC_VERSION}
+#        cap_add:
+#        - NET_ADMIN
+#        environment:
+#        - CORE_LOGGING_PEER=WARN
+#        - CORE_VM_DOCKER_ATTACHSTDOUT=true
+#        - CORE_CHAINCODE_DEPLOYTIMEOUT=1000s
+#        - CORE_CHAINCODE_STARTUPTIMEOUT=1000s
+#        - CORE_CHAINCODE_EXECUTETIMEOUT=999999s
+#        - CORE_CHAINCODE_LOGGING_LEVEL=WARN
+#        - CORE_CHAINCODE_LOGGING_SHIM=WARN
+#        - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+#        - CORE_PEER_ID=peer26.org1.example.com
+#        - CORE_PEER_ENDORSER_ENABLED=true
+#        - CORE_PEER_LOCALMSPID=Org1MSP
+#        - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/msp/
+#        - CORE_PEER_ADDRESS=peer26.org1.example.com:7051
+#        - CORE_PEER_GOSSIP_USELEADERELECTION=false
+#        - CORE_PEER_GOSSIP_ORGLEADER=false
+#        - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer26.org1.example.com:7051
+#        - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.example.com:7051
+#        - CORE_PEER_TLS_ENABLED=true
+#        - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/msp/peer/tls/server.key
+#        - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/msp/peer/tls/server.crt
+#        - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/msp/peer/tls/ca.crt
+#        - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=2org1peercouchdb_solo_raft_default
+#        - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+#        - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer26.org1.example.com:5984
+#        working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+#        command: peer node start
+#        ports:
+#        - 19651:7051
+#        volumes:
+#        - /var/run/:/host/var/run/
+#        - ../../config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer26.org1.example.com/:/etc/hyperledger/msp/peer
+#        depends_on:
+#        - orderer0.example.com
+#        - couchdb.peer26.org1.example.com
+
+#    peer27.org1.example.com:
+#        container_name: peer27.org1.example.com
+#        image: hyperledger/fabric-peer:${FABRIC_VERSION}
+#        cap_add:
+#        - NET_ADMIN
+#        environment:
+#        - CORE_LOGGING_PEER=WARN
+#        - CORE_VM_DOCKER_ATTACHSTDOUT=true
+#        - CORE_CHAINCODE_DEPLOYTIMEOUT=1000s
+#        - CORE_CHAINCODE_STARTUPTIMEOUT=1000s
+#        - CORE_CHAINCODE_EXECUTETIMEOUT=999999s
+#        - CORE_CHAINCODE_LOGGING_LEVEL=WARN
+#        - CORE_CHAINCODE_LOGGING_SHIM=WARN
+#        - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+#        - CORE_PEER_ID=peer27.org1.example.com
+#        - CORE_PEER_ENDORSER_ENABLED=true
+#        - CORE_PEER_LOCALMSPID=Org1MSP
+#        - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/msp/
+#        - CORE_PEER_ADDRESS=peer27.org1.example.com:7051
+#        - CORE_PEER_GOSSIP_USELEADERELECTION=false
+#        - CORE_PEER_GOSSIP_ORGLEADER=false
+#        - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer27.org1.example.com:7051
+#        - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.example.com:7051
+#        - CORE_PEER_TLS_ENABLED=true
+#        - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/msp/peer/tls/server.key
+#        - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/msp/peer/tls/server.crt
+#        - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/msp/peer/tls/ca.crt
+#        - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=2org1peercouchdb_solo_raft_default
+#        - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+#        - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer27.org1.example.com:5984
+#        working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+#        command: peer node start
+#        ports:
+#        - 19751:7051
+#        volumes:
+#        - /var/run/:/host/var/run/
+#        - ../../config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer27.org1.example.com/:/etc/hyperledger/msp/peer
+#        depends_on:
+#        - orderer0.example.com
+#        - couchdb.peer27.org1.example.com
+
+#    peer28.org1.example.com:
+#        container_name: peer28.org1.example.com
+#        image: hyperledger/fabric-peer:${FABRIC_VERSION}
+#        cap_add:
+#        - NET_ADMIN
+#        environment:
+#        - CORE_LOGGING_PEER=WARN
+#        - CORE_VM_DOCKER_ATTACHSTDOUT=true
+#        - CORE_CHAINCODE_DEPLOYTIMEOUT=1000s
+#        - CORE_CHAINCODE_STARTUPTIMEOUT=1000s
+#        - CORE_CHAINCODE_EXECUTETIMEOUT=999999s
+#        - CORE_CHAINCODE_LOGGING_LEVEL=WARN
+#        - CORE_CHAINCODE_LOGGING_SHIM=WARN
+#        - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+#        - CORE_PEER_ID=peer28.org1.example.com
+#        - CORE_PEER_ENDORSER_ENABLED=true
+#        - CORE_PEER_LOCALMSPID=Org1MSP
+#        - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/msp/
+#        - CORE_PEER_ADDRESS=peer28.org1.example.com:7051
+#        - CORE_PEER_GOSSIP_USELEADERELECTION=false
+#        - CORE_PEER_GOSSIP_ORGLEADER=false
+#        - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer28.org1.example.com:7051
+#        - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.example.com:7051
+#        - CORE_PEER_TLS_ENABLED=true
+#        - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/msp/peer/tls/server.key
+#        - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/msp/peer/tls/server.crt
+#        - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/msp/peer/tls/ca.crt
+#        - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=2org1peercouchdb_solo_raft_default
+#        - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+#        - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer28.org1.example.com:5984
+#        working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+#        command: peer node start
+#        ports:
+#        - 19851:7051
+#        volumes:
+#        - /var/run/:/host/var/run/
+#        - ../../config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer28.org1.example.com/:/etc/hyperledger/msp/peer
+#        depends_on:
+#        - orderer0.example.com
+#        - couchdb.peer28.org1.example.com
+
+#    peer29.org1.example.com:
+#        container_name: peer29.org1.example.com
+#        image: hyperledger/fabric-peer:${FABRIC_VERSION}
+#        cap_add:
+#        - NET_ADMIN
+#        environment:
+#        - CORE_LOGGING_PEER=WARN
+#        - CORE_VM_DOCKER_ATTACHSTDOUT=true
+#        - CORE_CHAINCODE_DEPLOYTIMEOUT=1000s
+#        - CORE_CHAINCODE_STARTUPTIMEOUT=1000s
+#        - CORE_CHAINCODE_EXECUTETIMEOUT=999999s
+#        - CORE_CHAINCODE_LOGGING_LEVEL=WARN
+#        - CORE_CHAINCODE_LOGGING_SHIM=WARN
+#        - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+#        - CORE_PEER_ID=peer29.org1.example.com
+#        - CORE_PEER_ENDORSER_ENABLED=true
+#        - CORE_PEER_LOCALMSPID=Org1MSP
+#        - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/msp/
+#        - CORE_PEER_ADDRESS=peer29.org1.example.com:7051
+#        - CORE_PEER_GOSSIP_USELEADERELECTION=false
+#        - CORE_PEER_GOSSIP_ORGLEADER=false
+#        - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer29.org1.example.com:7051
+#        - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.example.com:7051
+#        - CORE_PEER_TLS_ENABLED=true
+#        - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/msp/peer/tls/server.key
+#        - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/msp/peer/tls/server.crt
+#        - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/msp/peer/tls/ca.crt
+#        - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=2org1peercouchdb_solo_raft_default
+#        - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+#        - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer29.org1.example.com:5984
+#        working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+#        command: peer node start
+#        ports:
+#        - 19951:7051
+#        volumes:
+#        - /var/run/:/host/var/run/
+#        - ../../config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer29.org1.example.com/:/etc/hyperledger/msp/peer
+#        depends_on:
+#        - orderer0.example.com
+#        - couchdb.peer29.org1.example.com
+
+#    peer30.org1.example.com:
+#        container_name: peer30.org1.example.com
+#        image: hyperledger/fabric-peer:${FABRIC_VERSION}
+#        cap_add:
+#        - NET_ADMIN
+#        environment:
+#        - CORE_LOGGING_PEER=WARN
+#        - CORE_VM_DOCKER_ATTACHSTDOUT=true
+#        - CORE_CHAINCODE_DEPLOYTIMEOUT=1000s
+#        - CORE_CHAINCODE_STARTUPTIMEOUT=1000s
+#        - CORE_CHAINCODE_EXECUTETIMEOUT=999999s
+#        - CORE_CHAINCODE_LOGGING_LEVEL=WARN
+#        - CORE_CHAINCODE_LOGGING_SHIM=WARN
+#        - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+#        - CORE_PEER_ID=peer30.org1.example.com
+#        - CORE_PEER_ENDORSER_ENABLED=true
+#        - CORE_PEER_LOCALMSPID=Org1MSP
+#        - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/msp/
+#        - CORE_PEER_ADDRESS=peer30.org1.example.com:7051
+#        - CORE_PEER_GOSSIP_USELEADERELECTION=false
+#        - CORE_PEER_GOSSIP_ORGLEADER=false
+#        - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer30.org1.example.com:7051
+#        - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.example.com:7051
+#        - CORE_PEER_TLS_ENABLED=true
+#        - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/msp/peer/tls/server.key
+#        - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/msp/peer/tls/server.crt
+#        - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/msp/peer/tls/ca.crt
+#        - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=2org1peercouchdb_solo_raft_default
+#        - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+#        - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer30.org1.example.com:5984
+#        working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+#        command: peer node start
+#        ports:
+#        - 20051:7051
+#        volumes:
+#        - /var/run/:/host/var/run/
+#        - ../../config_solo_raft/crypto-config/peerOrganizations/org1.example.com/peers/peer30.org1.example.com/:/etc/hyperledger/msp/peer
+#        depends_on:
+#        - orderer0.example.com
+#        - couchdb.peer30.org1.example.com
+
     couchdb.peer0.org1.example.com:
         container_name: couchdb.peer0.org1.example.com
         image: couchdb:2.3
@@ -1402,6 +1607,56 @@ services:
         - 18584:5984
         environment:
             DB_URL: http://localhost:5984/member_db
+
+#    couchdb.peer26.org1.example.com:
+#        container_name: couchdb.peer26.org1.example.com
+#        image: couchdb:2.3
+#        cap_add:
+#        - NET_ADMIN
+#        ports:
+#        - 18684:5984
+#        environment:
+#            DB_URL: http://localhost:5984/member_db
+
+#    couchdb.peer27.org1.example.com:
+#        container_name: couchdb.peer27.org1.example.com
+#        image: couchdb:2.3
+#        cap_add:
+#        - NET_ADMIN
+#        ports:
+#        - 18784:5984
+#        environment:
+#            DB_URL: http://localhost:5984/member_db
+
+#    couchdb.peer28.org1.example.com:
+#        container_name: couchdb.peer28.org1.example.com
+#        image: couchdb:2.3
+#        cap_add:
+#        - NET_ADMIN
+#        ports:
+#        - 18884:5984
+#        environment:
+#            DB_URL: http://localhost:5984/member_db
+
+#    couchdb.peer29.org1.example.com:
+#        container_name: couchdb.peer29.org1.example.com
+#        image: couchdb:2.3
+#        cap_add:
+#        - NET_ADMIN
+#        ports:
+#        - 18984:5984
+#        environment:
+#            DB_URL: http://localhost:5984/member_db
+
+#    couchdb.peer30.org1.example.com:
+#        container_name: couchdb.peer30.org1.example.com
+#        image: couchdb:2.3
+#        cap_add:
+#        - NET_ADMIN
+#        ports:
+#        - 20084:5984
+#        environment:
+#            DB_URL: http://localhost:5984/member_db
 
     peer0.org2.example.com:
         container_name: peer0.org2.example.com

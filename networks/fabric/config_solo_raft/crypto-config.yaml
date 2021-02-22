@@ -16,7 +16,6 @@
 OrdererOrgs:
 - Name: Orderer
   Domain: example.com
-
   Template:
       Count: 1
 
